@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./head.ejs') %>
+<body>
+  <div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <%- include('./nav.ejs') %>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_settings-panel.html -->
+      <%- include('./rightsidebar.ejs') %>
+      <!-- partial -->
+      <!-- partial:partials/_sidebar.html -->
+      <%- include('./sidebar.ejs') %>
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-lg-4 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title"> <%= data.name %>'s Appointment</h4>
+                  <p>Email: <%= data.email %></p>
+                  <p>Service: <%= data.service %></p>
+                  <p>Date: <%= finalDate %></p>
+                  <p>Time: <%= data.time %></p>
+                  <form method="POST" action="/confirm">
+                    <input type="hidden" name="id" value="<%= data._id %>" />
+                    <input type="submit" class="btn btn-outline-success btn-fw" value="Confirm">
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-8 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Confirmed Appointments in <%= finalDate %> (D/M/Y)</h4>
+                    <div class="table-responsive">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th>
+                              Full Name
+                            </th>
+                            <th>
+                              Email
+                            </th>                        
+                            <th>
+                              Date(D/M/Y)
+                            </th>
+                            <th>
+                              Time
+                            </th>                            
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <% if(appointments.length > 0) { %>
+                                <% appointments.forEach(appointment => { %>
+                                  <% const date = new Date(appointment.date) %>
+                                  <% const year = date.getFullYear() %>
+                                  <% const month = date.getMonth() + 1 %>
+                                  <% const day = date.getDate() %>
+                                  <% const finalDate = `${day}/${month}/${year}` %>
+                                <tr>
+                                    <td><%= appointment.name %></td>
+                                    <td><%= appointment.email %></td>                                    
+                                    <td><%= finalDate %></td>
+                                    <td><%= appointment.time %></td>                                    
+                                </tr>
+                                <% }) %>
+                            <% } else { %>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>No Appointment Today</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <% } %>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+        
+        <!-- content-wrapper ends -->
+        <!-- partial:partials/_footer.html -->
+        <footer class="footer">
+          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021.  Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash. All rights reserved.</span>
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="ti-heart text-danger ml-1"></i></span>
+          </div>
+        </footer>
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+
+  <!-- plugins:js -->
+  <script src="/css/admin/vendors/js/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src="/css/admin/vendors/chart.js/Chart.min.js"></script>
+  <script src="/css/admin/vendors/datatables.net/jquery.dataTables.js"></script>
+  <script src="/css/admin/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+  <script src="/css/admin/js/dataTables.select.min.js"></script>
+
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <script src="/css/admin/js/off-canvas.js"></script>
+  <script src="/css/admin/js/hoverable-collapse.js"></script>
+  <script src="/css/admin/js/template.js"></script>
+  <script src="/css/admin/js/settings.js"></script>
+  <script src="/css/admin/js/todolist.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="/css/admin/js/dashboard.js"></script>
+  <script src="/css/admin/js/Chart.roundedBarCharts.js"></script>
+  <!-- End custom js for this page-->
+</body>
+
+</html>
+

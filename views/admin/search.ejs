@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./head.ejs') %>
+
+<body>
+  <div class="container-scroller">
+    
+    <%- include('./nav.ejs') %>
+    
+    <div class="container-fluid page-body-wrapper">
+    
+      <%- include('./rightsidebar.ejs') %>
+    
+      <%- include('./sidebar.ejs') %>
+      
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+          <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">                  
+                  <div class="table-responsive">
+                    <h3 class="card-title">Search results...</h3>
+                    <% if(appointments.length > 0) { %>
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>
+                            Name
+                          </th>
+                          <th>
+                            Email
+                          </th>
+                          <th>
+                            Service
+                          </th>
+                          <th>
+                            Date(D/M/Y)
+                          </th>
+                          <th>
+                            Time
+                          </th>
+                          <th>
+                            Status
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                            <% appointments.forEach(appointment => { %>
+                              <% const date = new Date(appointment.date) %>
+                              <% const year = date.getFullYear() %>
+                              <% const month = date.getMonth() + 1 %>
+                              <% const day = date.getDate() %>
+                              <% const finalDate = `${day}/${month}/${year}` %>
+                            <tr>
+                                <td><%= appointment.name %></td>
+                                <td><%= appointment.email %></td>
+                                <td><%= appointment.service %></td>
+                                <td><%= finalDate %></td>
+                                <td><%= appointment.time %></td>
+                                <td><%= appointment.status %></td>                                
+                            </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>                            
+                        <% } else { %>
+                        <p class="card-subtitle">No results found</p>
+                        <% } %>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        
+        <!-- content-wrapper ends -->
+        <!-- partial:partials/_footer.html -->
+        <footer class="footer">
+          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021.  Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash. All rights reserved.</span>
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="ti-heart text-danger ml-1"></i></span>
+          </div>
+        </footer>
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+
+  <!-- plugins:js -->
+  <script src="css/admin/vendors/js/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src="css/admin/vendors/chart.js/Chart.min.js"></script>
+  <script src="css/admin/vendors/datatables.net/jquery.dataTables.js"></script>
+  <script src="css/admin/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+  <script src="css/admin/js/dataTables.select.min.js"></script>
+
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <script src="css/admin/js/off-canvas.js"></script>
+  <script src="css/admin/js/hoverable-collapse.js"></script>
+  <script src="css/admin/js/template.js"></script>
+  <script src="css/admin/js/settings.js"></script>
+  <script src="css/admin/js/todolist.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="css/admin/js/dashboard.js"></script>
+  <script src="css/admin/js/Chart.roundedBarCharts.js"></script>
+  <!-- End custom js for this page-->
+</body>
+
+</html>
+

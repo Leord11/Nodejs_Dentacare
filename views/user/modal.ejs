@@ -1,0 +1,52 @@
+<div class="modal fade" id="modalRequest" tabindex="-1" role="dialog" aria-labelledby="modalRequestLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalRequestLabel">Make an Appointment</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="/appointments" method="POST">
+            <div class="form-group">
+            <!-- <label for="appointment_name" class="text-black">Full Name</label> -->
+            <input type="text" name="name" class="form-control" id="appointment_name" placeholder="Full Name" required>
+            </div>
+            <div class="form-group">
+            <!-- <label for="appointment_email" class="text-black">Email</label> -->
+            <input type="text" name="email" class="form-control" id="appointment_email" placeholder="Email" required>
+            </div>
+            <div class="form-group">  
+            <select name="service" id="" class="form-control" title="Service">      
+                <option value="Teeth Whitening">Teeth Whitening</option>
+                <option value="Teeth Cleaning">Teeth CLeaning</option>
+                <option value="Quality Brackets">Quality Brackets</option>
+                <option value="Modern Anesthetic">Modern Anesthetic</option>
+            </select>
+            </div>
+            <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                <input type="text" name="date" required class="form-control appointment_date" placeholder="Date">
+                </div>    
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                <input type="text" name="time" class="form-control appointment_time" placeholder="Time" required>
+                </div>
+            </div>
+            </div>    
+            <div class="form-group">
+            <!-- <label for="appointment_message" class="text-black">Message</label> -->
+            <textarea name="message" id="appointment_message" class="form-control" cols="30" rows="10" placeholder="Message" style="max-height: 150px;"></textarea>
+            </div>
+            <div class="form-group">              
+              <button class="btn btn-primary">Make an Appointment</button>
+            </div>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+  </div>
