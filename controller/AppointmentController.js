@@ -52,28 +52,41 @@ const index = async (req, res) => {
 const today = (req, res) => {
     withAction = false;
     withMessage = false;
-    Appointment.find({status: 'confirmed'}).where('date').equals(date)
-    .then(result => {
-        res.render('./admin/appointments', { appointments: result, tableTitle: "Today's Appointment", withAction, withMessage });
-    }).catch(err => console.log(err));
+
+    if(!isLogin) {
+        res.redirect('/login');
+    } else {
+        Appointment.find({status: 'confirmed'}).where('date').equals(date)
+        .then(result => {
+            res.render('./admin/appointments', { appointments: result, tableTitle: "Today's Appointment", withAction, withMessage });
+        }).catch(err => console.log(err));
+    }    
 };
 
 const pending = (req, res) => {
 
     withAction = true;
-    Appointment.find({status: 'pending'}).then(result => {
-        res.render('./admin/appointments', { appointments: result, tableTitle: "All Pending Appointments", withAction, withMessage, message : 'Appointment Successfully Confirmed' });
-        withMessage = false;
-    }).catch(err => console.log(err));
-    
+
+    if(!isLogin) {
+        res.redirect('/login');
+    } else {
+        Appointment.find({status: 'pending'}).then(result => {
+            res.render('./admin/appointments', { appointments: result, tableTitle: "All Pending Appointments", withAction, withMessage, message : 'Appointment Successfully Confirmed' });
+            withMessage = false;
+        }).catch(err => console.log(err));
+    }
 };
 
 const all_appointments = (req, res) => {
     withAction = false;
     withMessage = false;
-    Appointment.find({status: 'confirmed'}).then(result => {
-        res.render('./admin/appointments', { appointments: result, tableTitle: "All Confirmed Appointments", withAction, withMessage });
-    }).catch(err => console.log(err));
+    if(!isLogin) {
+        res.redirect('/login');
+    } else {
+        Appointment.find({status: 'confirmed'}).then(result => {
+            res.render('./admin/appointments', { appointments: result, tableTitle: "All Confirmed Appointments", withAction, withMessage });
+        }).catch(err => console.log(err));
+    }    
 };
 
 const appointment_store = (req, res) => {
