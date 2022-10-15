@@ -16,9 +16,9 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
 const dbURI = 'mongodb+srv://leord11:password1107@cluster01.cfadayp.mongodb.net/dentacare?retryWrites=true&w=majority';
-const dbURI_local = 'mongodb://localhost:27017/dentacare';
+// const dbURI_local = 'mongodb://localhost:27017/dentacare';
 
-mongoose.connect(dbURI_local)
+mongoose.connect(dbURI)
 .then((result) => {
     console.log('connected to database');
     app.listen(3000);
